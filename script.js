@@ -1,49 +1,63 @@
-let computerSelection
-let playerSelection
 const choices=["rock","paper","scissors"]
-
-computerSelection=function getComputerChoice(){
+let round=0;
+let playerp=0
+let computerp=0
+let buttons=document.querySelectorAll('.buttons');
+const won=document.querySelector('#won');
+const rounds=document.querySelector('#rounds');
+function getComputerChoice(){
     return choices[Math.floor(Math.random()*3)]
 }
-//change player input
-playerSelection=function getPlayerChoice(){
-    let choice=prompt("Choose rock paper or scissors")
-    return choice.toLowerCase()
+function press(){
+    won.textContent=playRound(this.id.toLowerCase(),getComputerChoice());
+    winner();
 }
+buttons.forEach(button => {
+    button.addEventListener('click',press);
+});
+
 function playRound(player,computer){
-    console.log(computer)
-    if ((player=="rock" && computer=="scissors") || (player=="scissors" && computer=="paper")|| (player=="paper" && computer=="rock")){
-
-        return "Player wins!"
-    }else if ((computer=="rock" && player=="scissors") || (computer=="scissors" && player=="paper")|| (computer=="paper" && player=="rock")){
-        return "Computer wins!"
-    }else{
-        return "Draw!"
-    }
-}
-function game(){
-    let result
-    let player=0
-    let computer=0
-
-    for(let i=0;i<5;i++){
-        console.log("Round "+(i+1))
-        //change to playerSelection() later
-        console.log(result=playRound("rock",computerSelection()))
-        if(result=="Player wins!"){
-            player++
-        }else if(result=="Computer wins!"){
-            computer++
-        }
-    }
+    rounds.textContent="Round "+(round+1)
+    round++;
     console.log(player)
     console.log(computer)
-    if(player>computer){
-        console.log("player won the game")
-    }else if(computer>player){
-        console.log("computer won the game")
+    if ((player=="rock" && computer=="scissors") || (player=="scissors" && computer=="paper")|| (player=="paper" && computer=="rock")){
+        playerp++;
+        return "Player wins!";
+    }else if ((computer=="rock" && player=="scissors") || (computer=="scissors" && player=="paper")|| (computer=="paper" && player=="rock")){
+        computerp++
+        return "Computer wins!";
     }else{
-        console.log("No one won")
+        return "Draw!";
     }
 }
-game()
+function winner(){
+    if(playerp == 5 || computerp ==5){
+        console.log(playerp)
+        console.log(computerp)
+        buttons.forEach(button => {
+            button.removeEventListener('click',press);
+        });
+        if(playerp>computerp){
+            won.textContent="You won the game! Good job!"
+        }else if(computerp>playerp){
+            won.textContent="Computer won the game :(";
+        }else{
+            won.textContent="No one won, try again one more time!";
+        }
+        won.setAttribute('style','color:#6EE1DA; font-weight:bold;')
+        showrestart();
+    }
+}
+function showrestart(){
+    const restartdiv=document.querySelector('#restart');
+    const restartbutton=document.createElement('button');
+    restartbutton.textContent="Click here to restart!";
+    restartdiv.appendChild(restartbutton);
+    restartbutton.setAttribute('style','background: #65CDE1; border: 0px; border-radius:20px; width:300px;height:100px; color:white;font-size:20px;font-weight:bold;')
+    restartbutton.addEventListener('mouseover',()=>{restartbutton.style.backgroundColor="#077DA8"})
+    restartbutton.addEventListener('mouseout',()=>{restartbutton.style.backgroundColor="#65CDE1"})
+    restartbutton.addEventListener('click',()=>{
+    location.reload();
+    })
+}
