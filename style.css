@@ -1,6 +1,7 @@
 body{
     color:white;
-    background-color: #0F4975;
+    background: rgb(15,73,117);
+    background: linear-gradient(90deg, rgba(15,73,117,1) 0%, rgba(50,145,164,1) 100%);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
 }
 @keyframes smoothheader{
@@ -65,4 +66,11 @@ img{
 }
 #rounds{
     color:#2099F5;
+}
+#compchoice{
+    color:#003f70; 
+    font-weight:bold;
+}
+#results{
+    text-align: center;
 }
