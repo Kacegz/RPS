@@ -5,6 +5,7 @@ let computerp=0
 let buttons=document.querySelectorAll('.buttons');
 const won=document.querySelector('#won');
 const compchoice=document.querySelector('#compchoice');
+const score=document.querySelector('#score');
 const rounds=document.querySelector('#rounds');
 function getComputerChoice(){
     return choices[Math.floor(Math.random()*3)]
@@ -24,11 +25,14 @@ function playRound(player,computer){
     compchoice.textContent="Computer picked "+computer;
     if ((player=="rock" && computer=="scissors") || (player=="scissors" && computer=="paper")|| (player=="paper" && computer=="rock")){
         playerp++;
+        score.textContent="You: "+playerp+" Computer: "+computerp;
         return "Player wins!";
     }else if ((computer=="rock" && player=="scissors") || (computer=="scissors" && player=="paper")|| (computer=="paper" && player=="rock")){
         computerp++
+        score.textContent="You: "+playerp+" Computer: "+computerp;
         return "Computer wins!";
     }else{
+        score.textContent="You: "+playerp+" Computer: "+computerp;
         return "Draw!";
     }
 }
@@ -47,7 +51,7 @@ function winner(){
             won.textContent="No one won, try again one more time!";
         }
         won.setAttribute('style','color:#6EE1DA; font-weight:bold;')
-        compchoice.textContent="You: "+playerp+" Computer: "+computerp;
+        compchoice.textContent="";
         showrestart();
     }
 }
