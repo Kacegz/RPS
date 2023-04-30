@@ -51,7 +51,7 @@ function winner(){
             won.textContent="No one won, try again one more time!";
         }
         won.setAttribute('style','color:#6EE1DA; font-weight:bold;')
-        compchoice.textContent="";
+        compchoice.textContent=" ";
         showrestart();
     }
 }
