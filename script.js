@@ -17,7 +17,6 @@ function press(){
 buttons.forEach(button => {
     button.addEventListener('click',press);
 });
-
 function playRound(player,computer){
     rounds.textContent="Round "+(round+1)
     round++;
@@ -51,7 +50,7 @@ function winner(){
             won.textContent="No one won, try again one more time!";
         }
         won.setAttribute('style','color:#6EE1DA; font-weight:bold;')
-        compchoice.textContent=" ";
+        compchoice.textContent="";
         showrestart();
     }
 }
